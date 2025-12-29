@@ -45,6 +45,161 @@
       .dialog-ctnr.medal {
         display: none !important;
       }
+
+      /* 优化显示效果 */
+      .blivemedal-dialog .el-dialog__body {
+        padding: 10px 20px;
+      }
+
+      /* 修复按钮文字不居中 */
+      .blivemedal-dialog .el-button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* 深色模式 - 适配 Bilibili-Evolved */
+      html.dark .blivemedal-dialog,
+      body.dark .blivemedal-dialog {
+        background-color: var(--Ga1_s, #232527) !important;
+      }
+      html.dark .blivemedal-dialog .el-dialog__header,
+      body.dark .blivemedal-dialog .el-dialog__header {
+        background-color: var(--Ga1_s, #232527) !important;
+      }
+      html.dark .blivemedal-dialog .el-dialog__title,
+      body.dark .blivemedal-dialog .el-dialog__title {
+        color: var(--Ga10, #e7e9eb) !important;
+      }
+      html.dark .blivemedal-dialog .el-table,
+      body.dark .blivemedal-dialog .el-table,
+      html.dark .blivemedal-dialog .el-table__expanded-cell,
+      body.dark .blivemedal-dialog .el-table__expanded-cell,
+      html.dark .blivemedal-dialog .el-table th,
+      body.dark .blivemedal-dialog .el-table th,
+      html.dark .blivemedal-dialog .el-table tr,
+      body.dark .blivemedal-dialog .el-table tr {
+        background-color: var(--Ga1_s, #232527) !important;
+        color: var(--Ga10, #e7e9eb) !important;
+        border-bottom-color: var(--Ga3, #46494d) !important;
+      }
+      html.dark .blivemedal-dialog .el-table td,
+      body.dark .blivemedal-dialog .el-table td {
+        background-color: var(--Ga1_s, #232527) !important;
+        color: var(--Ga10, #e7e9eb) !important;
+        border-bottom: 1px solid var(--Ga3, #46494d) !important;
+      }
+      html.dark .blivemedal-dialog .el-table--striped .el-table__body tr.el-table__row--striped td,
+      body.dark .blivemedal-dialog .el-table--striped .el-table__body tr.el-table__row--striped td {
+        background-color: var(--Ga2, #2f3134) !important;
+      }
+      html.dark .blivemedal-dialog .el-table--enable-row-hover .el-table__body tr:hover>td,
+      body.dark .blivemedal-dialog .el-table--enable-row-hover .el-table__body tr:hover>td {
+        background-color: var(--Ga3, #46494d) !important;
+      }
+      html.dark .blivemedal-dialog .el-table::before,
+      body.dark .blivemedal-dialog .el-table::before {
+        background-color: var(--Ga3, #46494d) !important;
+      }
+      html.dark .blivemedal-dialog .el-input__inner,
+      body.dark .blivemedal-dialog .el-input__inner {
+        background-color: var(--Ga2, #2f3134) !important;
+        border-color: var(--Ga3, #46494d) !important;
+        color: var(--Ga10, #e7e9eb) !important;
+      }
+      html.dark .blivemedal-dialog .el-checkbox,
+      body.dark .blivemedal-dialog .el-checkbox {
+        color: var(--Ga10, #e7e9eb) !important;
+      }
+      html.dark .blivemedal-dialog .el-dialog__headerbtn .el-dialog__close,
+      body.dark .blivemedal-dialog .el-dialog__headerbtn .el-dialog__close {
+        color: var(--Ga10, #e7e9eb) !important;
+      }
+      html.dark .blivemedal-dialog .el-dialog__headerbtn:hover .el-dialog__close,
+      body.dark .blivemedal-dialog .el-dialog__headerbtn:hover .el-dialog__close {
+        color: var(--theme-color, #409EFF) !important;
+      }
+      html.dark .blivemedal-dialog .el-link.el-link--primary,
+      body.dark .blivemedal-dialog .el-link.el-link--primary {
+        color: var(--theme-color, #409EFF) !important;
+      }
+      html.dark .blivemedal-dialog .el-link.el-link--primary:hover,
+      body.dark .blivemedal-dialog .el-link.el-link--primary:hover {
+        color: var(--theme-color-80, #66b1ff) !important;
+      }
+
+      /* 滚动条适配 */
+      html.dark .blivemedal-dialog .el-table__body-wrapper::-webkit-scrollbar,
+      body.dark .blivemedal-dialog .el-table__body-wrapper::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      html.dark .blivemedal-dialog .el-table__body-wrapper::-webkit-scrollbar-thumb,
+      body.dark .blivemedal-dialog .el-table__body-wrapper::-webkit-scrollbar-thumb {
+        background-color: var(--Ga3, #46494d);
+        border-radius: 5px;
+      }
+      html.dark .blivemedal-dialog .el-table__body-wrapper::-webkit-scrollbar-track,
+      body.dark .blivemedal-dialog .el-table__body-wrapper::-webkit-scrollbar-track {
+        background-color: var(--Ga1_s, #232527);
+      }
+      html.dark .blivemedal-dialog .el-table__body-wrapper::-webkit-scrollbar-corner,
+      body.dark .blivemedal-dialog .el-table__body-wrapper::-webkit-scrollbar-corner {
+        background-color: var(--Ga1_s, #232527);
+      }
+
+      /* 下拉菜单深色模式 */
+      html.dark .blivemedal-popper,
+      body.dark .blivemedal-popper {
+        background-color: var(--Ga1_s, #232527) !important;
+        border-color: var(--Ga3, #46494d) !important;
+      }
+      html.dark .blivemedal-popper .el-select-dropdown__item,
+      body.dark .blivemedal-popper .el-select-dropdown__item {
+        color: var(--Ga10, #e7e9eb) !important;
+      }
+      html.dark .blivemedal-popper .el-select-dropdown__item.hover,
+      html.dark .blivemedal-popper .el-select-dropdown__item:hover,
+      body.dark .blivemedal-popper .el-select-dropdown__item.hover,
+      body.dark .blivemedal-popper .el-select-dropdown__item:hover {
+        background-color: var(--Ga3, #46494d) !important;
+      }
+      html.dark .blivemedal-popper .popper__arrow,
+      body.dark .blivemedal-popper .popper__arrow {
+        border-bottom-color: var(--Ga3, #46494d) !important;
+      }
+      html.dark .blivemedal-popper .popper__arrow::after,
+      body.dark .blivemedal-popper .popper__arrow::after {
+        border-bottom-color: var(--Ga1_s, #232527) !important;
+      }
+
+      /* 按钮深色模式 */
+      html.dark .blivemedal-dialog .el-button--default,
+      body.dark .blivemedal-dialog .el-button--default {
+        background-color: var(--Ga2, #2f3134) !important;
+        border-color: var(--Ga3, #46494d) !important;
+        color: var(--Ga10, #e7e9eb) !important;
+      }
+      html.dark .blivemedal-dialog .el-button--default:hover,
+      body.dark .blivemedal-dialog .el-button--default:hover {
+        background-color: var(--Ga3, #46494d) !important;
+        border-color: var(--theme-color, #409EFF) !important;
+        color: var(--theme-color, #409EFF) !important;
+      }
+      html.dark .blivemedal-dialog .el-button--info,
+      body.dark .blivemedal-dialog .el-button--info {
+        background-color: var(--Ga5, #909399) !important;
+        border-color: var(--Ga5, #909399) !important;
+        color: #fff !important;
+      }
+
+      /* 标签深色模式 */
+      html.dark .blivemedal-dialog .el-tag--info,
+      body.dark .blivemedal-dialog .el-tag--info {
+        background-color: var(--Ga2, #2f3134) !important;
+        border-color: var(--Ga3, #46494d) !important;
+        color: var(--Ga6, #909399) !important;
+      }
     `
     let styleElement = unsafeWindow.document.createElement('style')
     styleElement.innerText = css
@@ -198,31 +353,14 @@
   let MedalDialog = {
     name: 'MedalDialog',
     template: `
-      <el-dialog :visible.sync="dialogVisible" title="我的粉丝勋章" top="60px" width="850px" :modal="false" append-to-body>
-        <div style="line-height: 40px">
-          <el-checkbox label="进入直播间时自动佩戴勋章" :value="config.autoWearMedal"
-            @change="value => setConfigItems({ autoWearMedal: value })"
-          ></el-checkbox>
-          <el-checkbox v-show="config.autoWearMedal" label="没有对应勋章时佩戴" :value="config.autoWearDefaultMedal"
-            @change="value => setConfigItems({ autoWearDefaultMedal: value })"
-          ></el-checkbox>
-          <el-select v-show="config.autoWearMedal" style="margin-left: 16px; width: 240px"
-            filterable :value="config.defaultMedalId" @change="value => setConfigItems({ defaultMedalId: value })"
-          >
-            <el-option v-for="item in sortedMedals" :key="item.medal.medal_id"
-              :label="item.anchor_info.nick_name + ' / ' + item.medal.medal_name" :value="item.medal.medal_id"
-            >
-              <span>{{ item.anchor_info.nick_name }}</span>
-              <span style="float: right; color: #8492a6; font-size: 13px">{{ item.medal.medal_name }}</span>
-            </el-option>
-          </el-select>
-        </div>
-        <div>
-          <el-button icon="el-icon-refresh" @click="refreshMedals">刷新勋章</el-button>
-          <el-input type="primary" v-model="query" placeholder="搜索" clearable style="margin-left: 70px; width: 180px"></el-input>
+      <el-dialog :visible.sync="dialogVisible" title="我的粉丝勋章" top="8vh" width="950px" :modal="false" append-to-body custom-class="blivemedal-dialog">
+        <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px;">
+          <el-checkbox v-model="showLightedOnly" style="margin-right: 15px">只显示已点亮</el-checkbox>
+          <el-button size="medium" icon="el-icon-refresh" @click="refreshMedals">刷新勋章</el-button>
+          <el-input size="medium" v-model="query" placeholder="搜索" clearable style="width: 200px; margin-left: 10px;"></el-input>
         </div>
 
-        <el-table :data="medalsTableData" stripe height="80vh">
+        <el-table :data="medalsTableData" stripe height="60vh">
           <el-table-column label="勋章" prop="medal.medal_name" width="100" sortable
             :sort-method="(a, b) => a.medal.medal_name.localeCompare(b.medal.medal_name)"
           >
@@ -260,12 +398,34 @@
             </template>
           </el-table-column>
         </el-table>
+        <div slot="footer" style="display: flex; align-items: center; justify-content: flex-start; min-height: 40px;">
+          <el-checkbox label="进入直播间时自动佩戴勋章" :value="config.autoWearMedal"
+            @change="value => setConfigItems({ autoWearMedal: value })"
+          ></el-checkbox>
+          <div v-show="config.autoWearMedal" style="display: flex; align-items: center; gap: 10px; margin-left: 15px;">
+            <el-checkbox label="没有对应勋章时佩戴" :value="config.autoWearDefaultMedal"
+              @change="value => setConfigItems({ autoWearDefaultMedal: value })"
+            ></el-checkbox>
+            <el-select style="width: 200px"
+              filterable :value="config.defaultMedalId" @change="value => setConfigItems({ defaultMedalId: value })"
+              popper-class="blivemedal-popper"
+            >
+              <el-option v-for="item in sortedMedals" :key="item.medal.medal_id"
+                :label="item.anchor_info.nick_name + ' / ' + item.medal.medal_name" :value="item.medal.medal_id"
+              >
+                <span>{{ item.anchor_info.nick_name }}</span>
+                <span style="float: right; color: #8492a6; font-size: 13px">{{ item.medal.medal_name }}</span>
+              </el-option>
+            </el-select>
+          </div>
+        </div>
       </el-dialog>
     `,
     data() {
       return {
         dialogVisible: false,
-        query: ''
+        query: '',
+        showLightedOnly: false
       }
     },
     computed: {
@@ -275,18 +435,18 @@
         curMedal: state => state.curMedal
       }),
       medalsTableData() {
-        if (this.query === '') {
-          return this.sortedMedals
+        let res = this.sortedMedals
+
+        if (this.showLightedOnly) {
+          res = res.filter(item => item.medal.is_lighted)
         }
 
-        let query = this.query.toLowerCase()
-        let res = []
-        for (let medal of this.sortedMedals) {
-          if (medal.medal.medal_name.toLowerCase().indexOf(query) !== -1
-              || medal.anchor_info.nick_name.toLowerCase().indexOf(query) !== -1
-          ) {
-            res.push(medal)
-          }
+        if (this.query !== '') {
+          let query = this.query.toLowerCase()
+          res = res.filter(medal => 
+            medal.medal.medal_name.toLowerCase().indexOf(query) !== -1
+            || medal.anchor_info.nick_name.toLowerCase().indexOf(query) !== -1
+          )
         }
         return res
       },
