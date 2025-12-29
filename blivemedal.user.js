@@ -1,9 +1,11 @@
 // ==UserScript==
 // @name         blivemedal
-// @namespace    http://tampermonkey.net/
-// @version      0.10.3
+// @namespace    https://github.com/yokinanya/blivemedal
+// @downloadURL  https://gcore.jsdelivr.net/gh/yokinanya/blivemedal@master/blivemedal.user.js
+// @updateURL    https://gcore.jsdelivr.net/gh/yokinanya/blivemedal@master/blivemedal.user.js
+// @version      1.0.0
 // @description  拯救B站直播换牌子的用户体验
-// @author       xfgryujk
+// @author       yokinanya
 // @include      /https?:\/\/live\.bilibili\.com\/?\??.*/
 // @include      /https?:\/\/live\.bilibili\.com\/\d+\??.*/
 // @include      /https?:\/\/live\.bilibili\.com\/(blanc\/)?\d+\??.*/
