@@ -3,7 +3,7 @@
 // @namespace    https://github.com/yokinanya/blivemedal
 // @downloadURL  https://gcore.jsdelivr.net/gh/yokinanya/blivemedal@master/blivemedal.user.js
 // @updateURL    https://gcore.jsdelivr.net/gh/yokinanya/blivemedal@master/blivemedal.user.js
-// @version      1.0.0
+// @version      1.2.0
 // @description  拯救B站直播换牌子的用户体验
 // @author       yokinanya
 // @match        *://live.bilibili.com/*
@@ -13,6 +13,7 @@
 // @require      https://s4.zstatic.net/ajax/libs/element-ui/2.15.7/index.js
 // @resource     element-ui-css https://s4.zstatic.net/ajax/libs/element-ui/2.15.7/theme-chalk/index.css
 // @grant        GM_getResourceText
+// @license      MIT
 // ==/UserScript==
 
 // grant不能是none，为了和网页的全局变量隔离。直播间网页全局变量有Vue，会导致element-ui出错
@@ -41,14 +42,191 @@
         display: none !important;
       }
 
+      .blivemedal-entry {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-height: 24px;
+        margin-left: 8px;
+        vertical-align: middle;
+      }
+
+      .blivemedal-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 50px;
+        max-width: 76px;
+        height: 22px;
+        padding: 0 9px;
+        border: 1px solid rgba(35, 173, 229, 0.22);
+        border-radius: 11px;
+        background: rgba(35, 173, 229, 0.08);
+        color: #23ade5;
+        font-family: inherit;
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: 400;
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        outline: none;
+      }
+
+      .blivemedal-button:hover,
+      .blivemedal-button:focus {
+        border-color: rgba(35, 173, 229, 0.38);
+        background: rgba(35, 173, 229, 0.14);
+        color: #23ade5;
+      }
+
       /* 屏蔽选牌子对话框，防止刷新时闪烁 */
       .dialog-ctnr.medal {
         display: none !important;
       }
 
-      /* 优化显示效果 */
+      .blivemedal-dialog .el-dialog__header {
+        padding: 20px 24px 10px;
+      }
+
       .blivemedal-dialog .el-dialog__body {
-        padding: 10px 20px;
+        padding: 8px 24px 0;
+      }
+
+      .blivemedal-dialog .el-dialog__footer {
+        padding: 12px 24px 18px;
+      }
+
+      .blivemedal-toolbar {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .blivemedal-toolbar .el-input {
+        width: 180px;
+      }
+
+      .blivemedal-toolbar .el-input__inner {
+        height: 32px;
+        line-height: 32px;
+        border-radius: 4px;
+      }
+
+      .blivemedal-tool-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        padding: 0 14px;
+        border: 1px solid rgba(35, 173, 229, 0.22);
+        border-radius: 4px;
+        background: rgba(35, 173, 229, 0.06);
+        color: #23ade5;
+        font-family: inherit;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .blivemedal-tool-button:hover {
+        border-color: rgba(35, 173, 229, 0.38);
+        background: rgba(35, 173, 229, 0.12);
+        color: #23ade5;
+      }
+
+      .blivemedal-tool-button::before {
+        content: '↻';
+        margin-right: 6px;
+        font-size: 13px;
+      }
+
+      .blivemedal-medal-tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 52px;
+        max-width: 86px;
+        height: 24px;
+        padding: 0 10px;
+        border: 1px solid rgba(35, 173, 229, 0.28);
+        border-radius: 5px;
+        background: rgba(35, 173, 229, 0.12);
+        color: #23ade5;
+        font-size: 12px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .blivemedal-medal-tag.is-off {
+        border-color: rgba(0, 0, 0, 0.08);
+        background: rgba(0, 0, 0, 0.04);
+        color: rgba(0, 0, 0, 0.48);
+      }
+
+      .blivemedal-action-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 56px;
+        height: 28px;
+        padding: 0 12px;
+        border: 0;
+        border-radius: 4px;
+        background: #23ade5;
+        color: #ffffff;
+        font-family: inherit;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .blivemedal-action-button:hover {
+        background: #39b9ec;
+      }
+
+      .blivemedal-action-button.is-muted {
+        background: rgba(0, 0, 0, 0.36);
+      }
+
+      .blivemedal-action-button.is-muted:hover {
+        background: rgba(0, 0, 0, 0.46);
+      }
+
+      .blivemedal-dialog .el-table {
+        border-radius: 4px;
+      }
+
+      .blivemedal-dialog .el-table th {
+        height: 40px;
+        padding: 0;
+      }
+
+      .blivemedal-dialog .el-table td {
+        height: 54px;
+        padding: 0;
+      }
+
+      .blivemedal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 36px;
+      }
+
+      .blivemedal-auto-default {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: 16px;
+      }
+
+      .blivemedal-auto-default .el-select {
+        width: 220px;
       }
 
       /* 修复按钮文字不居中 */
@@ -126,6 +304,47 @@
       html.dark .blivemedal-dialog .el-link.el-link--primary:hover,
       body.dark .blivemedal-dialog .el-link.el-link--primary:hover {
         color: var(--theme-color-80, #66b1ff) !important;
+      }
+
+      html.dark .blivemedal-button,
+      body.dark .blivemedal-button {
+        border-color: rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.88);
+      }
+      html.dark .blivemedal-button:hover,
+      html.dark .blivemedal-button:focus,
+      body.dark .blivemedal-button:hover,
+      body.dark .blivemedal-button:focus {
+        border-color: rgba(255, 255, 255, 0.28);
+        background: rgba(255, 255, 255, 0.18);
+        color: #ffffff;
+      }
+      html.dark .blivemedal-tool-button,
+      body.dark .blivemedal-tool-button {
+        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        color: rgba(255, 255, 255, 0.82);
+      }
+      html.dark .blivemedal-tool-button:hover,
+      body.dark .blivemedal-tool-button:hover {
+        border-color: rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+      }
+      html.dark .blivemedal-medal-tag.is-off,
+      body.dark .blivemedal-medal-tag.is-off {
+        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        color: rgba(255, 255, 255, 0.62);
+      }
+      html.dark .blivemedal-action-button.is-muted,
+      body.dark .blivemedal-action-button.is-muted {
+        background: rgba(255, 255, 255, 0.18);
+      }
+      html.dark .blivemedal-action-button.is-muted:hover,
+      body.dark .blivemedal-action-button.is-muted:hover {
+        background: rgba(255, 255, 255, 0.26);
       }
 
       /* 滚动条适配 */
@@ -225,7 +444,7 @@
     }
 
     function isLoaded() {
-        if (document.querySelector('#control-panel-ctnr-box') === null) {
+        if (getMedalButtonMountElement().element === null) {
             return false
         }
         return true
@@ -287,9 +506,9 @@
     })
 
     function initUi() {
-        let panelElement = unsafeWindow.document.querySelector('#control-panel-ctnr-box')
+        let mount = getMedalButtonMountElement()
         let myMedalButtonElement = unsafeWindow.document.createElement('div')
-        panelElement.appendChild(myMedalButtonElement)
+        mount.element.insertBefore(myMedalButtonElement, mount.beforeElement)
 
         new Vue({
             el: myMedalButtonElement,
@@ -298,12 +517,12 @@
                 MedalDialog
             },
             template: `
-        <div>
-          <el-button type="primary" style="font-size: 12px; min-width: 80px; height: 24px; padding: 6px 12px;"
+        <div class="blivemedal-entry">
+          <button class="blivemedal-button" type="button"
             @click="showMedalDialog"
           >
             {{ curMedal === null ? '勋章' : curMedal.medal_name }}
-          </el-button>
+          </button>
           <medal-dialog ref="medalDialog"></medal-dialog>
         </div>
       `,
@@ -350,14 +569,84 @@
     })
   }
 
+    function getMedalButtonMountElement() {
+        let controlPanelElement = unsafeWindow.document.querySelector('#control-panel-ctnr-box')
+        let medalSectionElement = unsafeWindow.document.querySelector('#control-panel-ctnr-box .medal-section')
+        if (medalSectionElement !== null && medalSectionElement.parentElement !== null) {
+            return {
+                element: medalSectionElement.parentElement,
+                beforeElement: medalSectionElement.nextElementSibling
+            }
+        }
+
+        let toolbarElement = getDanmakuToolbarElement()
+        if (toolbarElement !== null) {
+            return {
+                element: toolbarElement,
+                beforeElement: getToolbarRightElement(toolbarElement)
+            }
+        }
+        if (controlPanelElement !== null) {
+            return {
+                element: controlPanelElement,
+                beforeElement: null
+            }
+        }
+        return {
+            element: null,
+            beforeElement: null
+        }
+    }
+
+    function getDanmakuToolbarElement() {
+        let textareaElement = unsafeWindow.document.querySelector('textarea[placeholder*="发送"]')
+        let sendButtonElement = [...unsafeWindow.document.querySelectorAll('button')]
+            .find(element => element.textContent.trim() === '发送')
+        if (textareaElement === null || sendButtonElement === undefined) {
+            return null
+        }
+
+        let inputRowElement = getCommonAncestor(textareaElement, sendButtonElement)
+        while (
+            inputRowElement !== null
+            && inputRowElement.previousElementSibling === null
+            && inputRowElement.parentElement !== null
+        ) {
+            inputRowElement = inputRowElement.parentElement
+        }
+        return inputRowElement === null ? null : inputRowElement.previousElementSibling
+    }
+
+    function getCommonAncestor(aElement, bElement) {
+        let ancestors = new Set()
+        for (let element = aElement; element !== null; element = element.parentElement) {
+            ancestors.add(element)
+        }
+        for (let element = bElement; element !== null; element = element.parentElement) {
+            if (ancestors.has(element)) {
+                return element
+            }
+        }
+        return null
+    }
+
+    function getToolbarRightElement(toolbarElement) {
+        for (let element of toolbarElement.children) {
+            if (element.textContent.includes('粉丝特惠')) {
+                return element
+            }
+        }
+        return null
+    }
+
     let MedalDialog = {
         name: 'MedalDialog',
         template: `
-      <el-dialog :visible.sync="dialogVisible" title="我的粉丝勋章" top="8vh" width="950px" :modal="false" append-to-body custom-class="blivemedal-dialog">
-        <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px;">
-          <el-checkbox v-model="showLightedOnly" style="margin-right: 15px">只显示已点亮</el-checkbox>
-          <el-button size="medium" icon="el-icon-refresh" @click="refreshMedals">刷新勋章</el-button>
-          <el-input size="medium" v-model="query" placeholder="搜索" clearable style="width: 200px; margin-left: 10px;"></el-input>
+      <el-dialog :visible.sync="dialogVisible" title="我的粉丝勋章" top="8vh" width="900px" :modal="false" append-to-body custom-class="blivemedal-dialog">
+        <div class="blivemedal-toolbar">
+          <el-checkbox v-model="showLightedOnly">只显示已点亮</el-checkbox>
+          <button class="blivemedal-tool-button" type="button" @click="refreshMedals">刷新勋章</button>
+          <el-input size="medium" v-model="query" placeholder="搜索" clearable></el-input>
         </div>
 
         <el-table :data="medalsTableData" stripe height="60vh">
@@ -365,11 +654,11 @@
             :sort-method="(a, b) => a.medal.medal_name.localeCompare(b.medal.medal_name)"
           >
             <template slot-scope="scope">
-              <el-tag :type="scope.row.medal.is_lighted ? '' : 'info'">{{ scope.row.medal.medal_name }}</el-tag>
+              <span class="blivemedal-medal-tag" :class="{ 'is-off': !scope.row.medal.is_lighted }">{{ scope.row.medal.medal_name }}</span>
             </template>
           </el-table-column>
           <el-table-column label="等级" prop="medal.level" width="80" sortable></el-table-column>
-          <el-table-column label="主播昵称" prop="anchor_info.nick_name" width="200" sortable
+          <el-table-column label="主播昵称" prop="anchor_info.nick_name" min-width="180" sortable
             :sort-method="(a, b) => a.anchor_info.nick_name.localeCompare(b.anchor_info.nick_name)"
           >
             <template slot-scope="scope">
@@ -379,7 +668,7 @@
               <el-badge v-if="scope.row.room_info.living_status" is-dot></el-badge>
             </template>
           </el-table-column>
-          <el-table-column label="亲密度/原力值" prop="medal.intimacy" width="140" sortable>
+          <el-table-column label="亲密度/原力值" prop="medal.intimacy" width="150" sortable>
             <template slot-scope="scope">
               {{ scope.row.medal.intimacy }} / {{ scope.row.medal.next_intimacy }}
             </template>
@@ -389,24 +678,24 @@
               {{ scope.row.medal.today_feed }} / {{ scope.row.medal.day_limit }}
             </template>
           </el-table-column>
-          <el-table-column label="操作" width="120">
+          <el-table-column label="操作" width="110">
             <template slot-scope="scope">
-              <el-button v-if="curMedal !== null && scope.row.medal.medal_id === curMedal.medal_id"
-                type="info" size="mini" @click="takeOffMedal"
-              >取消佩戴</el-button>
-              <el-button v-else type="primary" size="mini" @click="wearMedal(scope.row)">佩戴</el-button>
+              <button v-if="curMedal !== null && scope.row.medal.medal_id === curMedal.medal_id"
+                class="blivemedal-action-button is-muted" type="button" @click="takeOffMedal"
+              >取消佩戴</button>
+              <button v-else class="blivemedal-action-button" type="button" @click="wearMedal(scope.row)">佩戴</button>
             </template>
           </el-table-column>
         </el-table>
-        <div slot="footer" style="display: flex; align-items: center; justify-content: flex-start; min-height: 40px;">
+        <div slot="footer" class="blivemedal-footer">
           <el-checkbox label="进入直播间时自动佩戴勋章" :value="config.autoWearMedal"
             @change="value => setConfigItems({ autoWearMedal: value })"
           ></el-checkbox>
-          <div v-show="config.autoWearMedal" style="display: flex; align-items: center; gap: 10px; margin-left: 15px;">
+          <div v-show="config.autoWearMedal" class="blivemedal-auto-default">
             <el-checkbox label="没有对应勋章时佩戴" :value="config.autoWearDefaultMedal"
               @change="value => setConfigItems({ autoWearDefaultMedal: value })"
             ></el-checkbox>
-            <el-select style="width: 200px"
+            <el-select
               filterable :value="config.defaultMedalId" @change="value => setConfigItems({ defaultMedalId: value })"
               popper-class="blivemedal-popper"
             >
