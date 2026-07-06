@@ -3,7 +3,7 @@
 // @namespace    https://github.com/yokinanya/blivemedal
 // @downloadURL  https://gcore.jsdelivr.net/gh/yokinanya/blivemedal@master/blivemedal.user.js
 // @updateURL    https://gcore.jsdelivr.net/gh/yokinanya/blivemedal@master/blivemedal.user.js
-// @version      1.2.0
+// @version      1.2.1
 // @description  拯救B站直播换牌子的用户体验
 // @author       yokinanya
 // @match        *://live.bilibili.com/*
@@ -80,6 +80,12 @@
         border-color: rgba(35, 173, 229, 0.38);
         background: rgba(35, 173, 229, 0.14);
         color: #23ade5;
+      }
+
+      .blivemedal-button.is-off {
+        border-color: rgba(0, 0, 0, 0.08);
+        background: rgba(0, 0, 0, 0.04);
+        color: rgba(0, 0, 0, 0.48);
       }
 
       /* 屏蔽选牌子对话框，防止刷新时闪烁 */
@@ -308,6 +314,12 @@
 
       html.dark .blivemedal-button,
       body.dark .blivemedal-button {
+        border-color: rgba(35, 173, 229, 0.42);
+        background: rgba(35, 173, 229, 0.18);
+        color: #23ade5;
+      }
+      html.dark .blivemedal-button.is-off,
+      body.dark .blivemedal-button.is-off {
         border-color: rgba(255, 255, 255, 0.18);
         background: rgba(255, 255, 255, 0.12);
         color: rgba(255, 255, 255, 0.88);
@@ -519,6 +531,7 @@
             template: `
         <div class="blivemedal-entry">
           <button class="blivemedal-button" type="button"
+            :class="curMedal === null ? 'is-off' : 'is-on'"
             @click="showMedalDialog"
           >
             {{ curMedal === null ? '勋章' : curMedal.medal_name }}
